@@ -115,6 +115,16 @@ highlightClip.end = setHighlightDuration;
 highlightClip.start = 0;
 highlightClip.inPoint = highlightTime.seconds - setHighlightDuration.seconds;
 
+/*
+markers = app.project.activeSequence.markers;
+var markerStart = new Time();
+markerStart.seconds = setHighlightDuration.seconds; 
+markers.createMarker(markerStart.seconds, "dunAnimation marker", setTensionDuration.seconds);
+
+//app.project.activeSequence.videoTracks[1].insertClip(app.project.rootItem.children[6], app.project.activeSequence.markers[0].start);
+
+app.project.activeSequence.markers[0].start = setHighlightDuration.seconds;
+
 app.project.activeSequence.videoTracks[1].insertClip(app.project.rootItem.children[6], setHighlightDuration.seconds);
 var dunAnimation = app.project.activeSequence.videoTracks[1].clips[1];
 var dunEffectAnimation;
@@ -141,7 +151,7 @@ dunEffect2Animation.properties[1].addKey(app.project.activeSequence.videoTracks[
 dunEffect2Animation.properties[1].addKey(app.project.activeSequence.videoTracks[1].clips[1].inPoint.seconds + app.project.activeSequence.videoTracks[1].clips[1].end.seconds);
 dunEffect2Animation.properties[1].setValueAtKey(app.project.activeSequence.videoTracks[1].clips[1].inPoint.seconds, 50);
 dunEffect2Animation.properties[1].setValueAtKey(app.project.activeSequence.videoTracks[1].clips[1].inPoint.seconds + app.project.activeSequence.videoTracks[1].clips[1].end.seconds, 715); 
-
+*/
 
 baseThisClip.end = setDuration;
 baseThisClip.start = setHighlightDuration.seconds + setTensionDuration.seconds;
@@ -224,4 +234,21 @@ app.project.activeSequence.videoTracks[0].insertClip(app.project.rootItem.childr
 /*
     MOBILE Setup ---------------------------------------------------------------------------------------------------------------------
 */
-//var mobileSequence = project.createNewSequenceFromClips("Base Sequence",[project.rootItem.children[1]], project.rootItem);
+var mobileSequence = project.createNewSequenceFromClips("Mobile Sequence",[project.rootItem.children[1]], project.rootItem);
+var exampleTime = new Time();
+exampleTime.seconds = 2;
+
+$.writeln("start " + app.project.activeSequence.videoTracks[0].clips[0].start.seconds);
+$.writeln("end " + app.project.activeSequence.videoTracks[0].clips[0].end.seconds);
+$.writeln("inPoint " + app.project.activeSequence.videoTracks[0].clips[0].inPoint.seconds);
+$.writeln("outPoint " + app.project.activeSequence.videoTracks[0].clips[0].outPoint.seconds);
+$.writeln("outPoint - 2 " + (app.project.activeSequence.videoTracks[0].clips[0].outPoint.seconds - 2));
+$.writeln("outPoint - exampleTime.seconds " + (app.project.activeSequence.videoTracks[0].clips[0].outPoint.seconds - exampleTime.seconds));
+var clipSeconds = app.project.activeSequence.videoTracks[0].clips[0].outPoint.seconds;
+$.writeln("outPoint - clipSeconds " + (clipSeconds - exampleTime.seconds));
+
+$.writeln("start " + app.project.activeSequence.videoTracks[0].clips[0].start.ticks);
+$.writeln("end " + app.project.activeSequence.videoTracks[0].clips[0].end.ticks);
+$.writeln("inPoint " + app.project.activeSequence.videoTracks[0].clips[0].inPoint.ticks);
+$.writeln("outPoint " + app.project.activeSequence.videoTracks[0].clips[0].outPoint.ticks);
+$.writeln("outPoint - 2" + app.project.activeSequence.videoTracks[0].clips[0].outPoint.ticks - exampleTime.ticks);
